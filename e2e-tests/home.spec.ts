@@ -18,6 +18,26 @@ test.describe('Open roles listing', () => {
         await expect(page.getByTestId('role-card')).toHaveCount(expectedRoleCount);
     });
 
+    test('shows current local weather after the visitor allows location access', async ({ page, context }) => {
+        await context.grantPermissions(['geolocation']);
+        await context.setGeolocation({ latitude: 47.6, longitude: -122.3 });
+        await page.route('https://api.open-meteo.com/v1/forecast**', (route) =>
+            route.fulfill({
+                json: {
+                    current: { temperature_2m: 18.4, weather_code: 2, is_day: 1 },
+                },
+            }),
+        );
+
+        await page.goto('/');
+        const status = page.getByTestId('weather-status');
+        await expect(status).toContainText('Choose “Use my location”');
+        await page.getByTestId('weather-locate').click();
+
+        await expect(status).toHaveText('Current weather for your location:');
+        await expect(page.getByTestId('weather-result')).toHaveText('18 °C · Partly cloudy');
+    });
+
     test('links through to a role detail page', async ({ page }) => {
         await page.goto('/');
         const firstCard = page.getByTestId('role-card').first();
