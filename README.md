@@ -4,6 +4,8 @@ The careers site for **Caldova**, an AI-native pharmaceutical company. Browse op
 
 This is the sample application for the **GitHub Copilot CLI** workshop. It's a deliberately small, realistic app: job postings are Markdown content, and the only database-backed feature is the apply flow.
 
+The open-roles page also offers optional local weather. Visitors choose whether to share their location; coordinates are used for the weather lookup and are not saved. Current conditions are provided by [Open-Meteo](https://open-meteo.com/).
+
 > [!NOTE]
 > Caldova is a fictional company created for demonstration and training purposes. The roles, locations, and applications in this app are not real.
 

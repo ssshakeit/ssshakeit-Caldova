@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import RoleCard from '../components/RoleCard.astro';
 import EmptyState from '../components/EmptyState.astro';
+import WeatherWidget from '../components/WeatherWidget.astro';
 import { sortByNewest } from '../lib/jobs';
 import type { Job } from '../types/job';
 
@@ -23,6 +24,8 @@ const jobs: Job[] = sortByNewest(
         and help us bring better treatments to patients faster.
       </p>
     </section>
+
+    <WeatherWidget />
 
     <h2 class="text-2xl font-medium mb-6 text-slate-100">Open roles</h2>
 
